@@ -11,6 +11,7 @@ from distutils.spawn import find_executable
 from distutils.sysconfig import get_python_lib
 from multiprocessing import cpu_count
 from subprocess import Popen
+import tarfile
 
 import os
 import re
@@ -22,11 +23,13 @@ from shutil import rmtree, copytree, copy
 # urlretrieve has a different location in Python 2 and Python 3
 import urllib
 if hasattr(urllib, "urlretrieve"):
-    urlretrieve = urllib.urlretrieve
+    opener = urllib.URLopener()
 else:
     import urllib.request
-    urlretrieve = urllib.request.urlretrieve
+    opener = urllib.request.URLopener()
 
+opener.addheader("User-Agent", "whatever")
+urlretrieve = opener.retrieve
 
 def run_process(cmds):
     p = Popen(cmds)
@@ -117,9 +120,8 @@ if (EIGEN3_INCLUDE_DIR is not None and
     os.path.isdir(os.path.join(os.pardir, EIGEN3_INCLUDE_DIR))):
     EIGEN3_INCLUDE_DIR = os.path.join(os.pardir, EIGEN3_INCLUDE_DIR)
 
-EIGEN3_DOWNLOAD_URL = ENV.get("EIGEN3_DOWNLOAD_URL", "https://bitbucket.org/eigen/eigen/get/b2e267dc99d4.zip") 
-# EIGEN3_DOWNLOAD_URL = ENV.get("EIGEN3_DOWNLOAD_URL", "https://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2")
-    
+EIGEN3_DOWNLOAD_URL = ENV.get("EIGEN3_DOWNLOAD_URL", "https://gitlab.com/libeigen/eigen/-/archive/3.3.4/eigen-3.3.4.tar.bz2")
+
 # Remove the "-Wstrict-prototypes" compiler option, which isn't valid for C++.
 cfg_vars = distutils.sysconfig.get_config_vars()
 CFLAGS = cfg_vars.get("CFLAGS")
@@ -250,18 +252,11 @@ class build(_build):
                     # tfile = tarfile.open("eigen.tar.bz2", 'r')
                     # tfile.extractall('eigen')
                     log.info("Fetching Eigen...")
-                    urlretrieve(EIGEN3_DOWNLOAD_URL, "eigen.zip")
+                    urlretrieve(EIGEN3_DOWNLOAD_URL, "eigen.tar.bz2")
                     log.info("Unpacking Eigen...")
-                    #BitBucket packages everything in a tarball with a changing root directory, so grab the only child
-                    with zipfile.ZipFile("eigen.zip") as zfile:
-                        for zipinfo in zfile.infolist():
-                            try:
-                                i = zipinfo.filename.index("/")
-                                zipinfo.filename = zipinfo.filename[i+1:]
-                                zfile.extract(zipinfo, "eigen")
-                            except ValueError:
-                                pass
-                    EIGEN3_INCLUDE_DIR = os.path.join(BUILD_DIR, "eigen")
+                    tfile = tarfile.open("eigen.tar.bz2", "r")
+                    tfile.extractall("eigen")
+                    EIGEN3_INCLUDE_DIR = os.path.join(BUILD_DIR, "eigen/eigen-3.3.4")
                 except:
                     raise DistutilsSetupError("Could not download Eigen from %r" % EIGEN3_DOWNLOAD_URL)
 
