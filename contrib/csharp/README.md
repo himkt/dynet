@@ -18,7 +18,6 @@ Most of these instructions are copied out of the documentation for compiling DyN
 
 ##### Prerequisites: 
 - Git for windows (https://git-scm.com/download/win)
-- TortoiseHg for windows (https://tortoisehg.bitbucket.io/download/index.html)
 - CMake for windows (https://cmake.org/download/) [**If you are compiling with Visual Studio 2019, you have to have cmake 3.14+**]
 - [GPU only] Nvidia GPU Toolkit (https://developer.nvidia.com/cuda-downloads)
 - [GPU only] Nvidia CuDNN library (https://developer.nvidia.com/rdp/cudnn-download) [this requires creating a free login and signing in].
@@ -29,7 +28,7 @@ Most of these instructions are copied out of the documentation for compiling DyN
 
 ##### Downloading the source code: 
 ```bash
-hg clone https://bitbucket.org/eigen/eigen/ -r b2e267d
+wget https://gitlab.com/libeigen/eigen/-/archive/3.3.4/eigen-3.3.4.zip && unzip eigen-3.3.4.zip && mv eigen-3.3.4 eigen
 git clone https://github.com/clab/dynet.git
 cd dynet
 mkdir build

@@ -25,7 +25,7 @@ For example on **Ubuntu Linux**:
 ::
     
     sudo apt-get update
-    sudo apt-get install python-pip build-essential cmake mercurial
+    sudo apt-get install python-pip build-essential cmake
 
 Or on **macOS**, first make sure the Apple Command Line Tools are installed, then
 get CMake, and Mercurial with either homebrew or macports:
@@ -33,8 +33,8 @@ get CMake, and Mercurial with either homebrew or macports:
 ::
 
     xcode-select --install
-    brew install cmake hg python # Using homebrew.
-    sudo port install cmake mercurial py-pip # Using macports.
+    brew install cmake python # Using homebrew.
+    sudo port install cmake py-pip # Using macports.
 
 On **Windows**, see :ref:`windows-python-install`.
 
@@ -89,7 +89,7 @@ The following is a list of all the commands needed to perform a manual install:
     cd dynet-base
     # getting dynet and eigen
     git clone https://github.com/clab/dynet.git
-    hg clone https://bitbucket.org/eigen/eigen -r b2e267d  # -r NUM specified a known working revision
+    wget https://gitlab.com/libeigen/eigen/-/archive/3.3.4/eigen-3.3.4.zip && unzip eigen-3.3.4.zip && mv eigen-3.3.4 eigen
     cd dynet
     mkdir build
     cd build
@@ -128,7 +128,7 @@ Then get Eigen:
 
     cd $HOME
     cd dynet-base
-    hg clone https://bitbucket.org/eigen/eigen/ -r b2e267d
+    wget https://gitlab.com/libeigen/eigen/-/archive/3.3.4/eigen-3.3.4.zip && unzip eigen-3.3.4.zip && mv eigen-3.3.4 eigen
     
 (`-r NUM` specifies a known working revision of Eigen. You can remove this in order to get the bleeding
 edge Eigen, with the risk of some compile breaks, and the possible benefit of added optimizations.)

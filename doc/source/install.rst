@@ -14,7 +14,7 @@ For example on **Ubuntu Linux**:
 
 ::
 
-    sudo apt-get install build-essential cmake mercurial
+    sudo apt-get install build-essential cmake git
 
 Or on **macOS**, first make sure the Apple Command Line Tools are installed, then
 get CMake, and Mercurial with either homebrew or macports:
@@ -22,20 +22,20 @@ get CMake, and Mercurial with either homebrew or macports:
 ::
 
     xcode-select --install
-    brew install cmake hg  # Using homebrew.
-    sudo port install cmake mercurial # Using macports.
+    brew install cmake # Using homebrew.
+    sudo port install cmake # Using macports.
 
 On **Windows**, see :ref:`windows-cpp-install`.
 
 To compile DyNet you also need the `development version of the Eigen
-library <https://bitbucket.org/eigen/eigen>`__. **If you use any of the
+library <https://gitlab.com/libeigen/eigen>`__. **If you use any of the
 released versions, you may get assertion failures or compile errors.**
 If you don't have Eigen already, you can get it easily using the
 following command:
 
 ::
 
-    hg clone https://bitbucket.org/eigen/eigen/ -r b2e267d
+    wget https://gitlab.com/libeigen/eigen/-/archive/3.3.4/eigen-3.3.4.zip && unzip eigen-3.3.4.zip && mv eigen-3.3.4 eigen
     
 The `-r NUM` specified a revision number that is known to work.  Adventurous
 users can remove it and use the very latest version, at the risk of the code

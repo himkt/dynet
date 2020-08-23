@@ -57,15 +57,14 @@ get CMake, and Mercurial with either homebrew or macports:
 On **Windows**, see [documentation](http://dynet.readthedocs.io/en/latest/install.html#windows-support).
 
 To compile DyNet you also need the [development version of the Eigen
-library](https://bitbucket.org/eigen/eigen). **If you use any of the
+library](https://gitlab.com/libeigen/eigen). **If you use any of the
 released versions, you may get assertion failures or compile errors.**
 If you don't have Eigen already, you can get it easily using the
 following command:
 
-    hg clone https://bitbucket.org/eigen/eigen/ -r b2e267d
+    wget https://gitlab.com/libeigen/eigen/-/archive/3.3.4/eigen-3.3.4.zip && unzip eigen-3.3.4.zip && mv eigen-3.3.4 eigen
 
-The `-r NUM` specified a revision number that is known to work.  Adventurous
-users can remove it and use the very latest version, at the risk of the code
+Adventurous users can remove it and use the very latest version, at the risk of the code
 breaking / not compiling. On macOS, you can install the latest development
 of Eigen using Homebrew:
 
