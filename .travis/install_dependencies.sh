@@ -49,9 +49,9 @@ if [[ "$BACKEND" == cuda ]]; then
 fi
 
 # Eigen
-wget https://bitbucket.org/eigen/eigen/get/b2e267dc99d4.zip
-unzip b2e267dc99d4.zip
-mv eigen-eigen-b2e267dc99d4 eigen
+wget https://gitlab.com/libeigen/eigen/-/archive/3.3.4/eigen-3.3.4.zip
+unzip eigen-3.3.4.zip
+mv eigen-3.3.4 eigen
 cd eigen
 mkdir build && cd build
 cmake ..
